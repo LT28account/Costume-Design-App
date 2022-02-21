@@ -103,7 +103,7 @@ class _ProjectState extends State<ProjectScreen> {
                   Container(
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: Colors.blue[900]!,
+                        color: Colors.green[900]!,
                         width: 2.0,
                       ),
                     ),
@@ -134,7 +134,7 @@ class _ProjectState extends State<ProjectScreen> {
                   Container(
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: Colors.blue[900]!,
+                        color: Colors.green[900]!,
                         width: 2.0,
                       ),
                     ),
@@ -160,7 +160,7 @@ class _ProjectState extends State<ProjectScreen> {
                   Container(
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: Colors.blue[900]!,
+                        color: Colors.green[900]!,
                         width: 2.0,
                       ),
                     ),

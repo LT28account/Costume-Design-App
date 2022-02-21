@@ -10,7 +10,7 @@ class ProjectView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.lime[200],
+      color: Colors.purple[200],
       elevation: 16.0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(35.0),

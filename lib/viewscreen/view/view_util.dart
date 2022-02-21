@@ -26,7 +26,7 @@ void showAlertDialog({
     barrierDismissible: false, //prevents from diaglog from closing when pressed outside barrier, true opposite
     builder: (context) {
       return AlertDialog(
-        backgroundColor: Colors.lime[200],
+        backgroundColor: Colors.purple[200],
         title: Text(title),
         actions: [
           ElevatedButton(
