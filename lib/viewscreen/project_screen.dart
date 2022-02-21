@@ -1,4 +1,10 @@
-import 'package:flutter/material.dart';
+//***************************************************************************************
+//    Title: RangeSlider class
+//    Author: Various Authors for source code
+//    Date: 2021
+//    Availability: https://api.flutter.dev/flutter/material/RangeSlider-class.html
+//***************************************************************************************/
+//import 'package:flutter/material.dart';
 import 'package:creativework2/model/project_record.dart';
 
 class ProjectScreen extends StatefulWidget {
