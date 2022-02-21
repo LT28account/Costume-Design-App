@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:creativework2/model/course.dart';
-import 'package:creativework2/model/user_record.dart';
+import 'package:creativework2/model/project_record.dart';
 import 'package:creativework2/viewscreen/cardlist_screen.dart';
-import 'package:creativework2/viewscreen/counterdemo_screen.dart';
-import 'package:creativework2/viewscreen/listview_screen.dart';
-import 'package:creativework2/viewscreen/userhome_screen.dart';
+import 'package:creativework2/viewscreen/project_screen.dart';
 import 'package:creativework2/viewscreen/view/view_util.dart';
 
 class StartScreen extends StatefulWidget {
@@ -26,12 +23,12 @@ class _StartState extends State<StartScreen> {
   void initState() {
     super.initState();
     con = _Controller(this);
-    print('************ StartScreen: initState()');
   }
+
+  void render(fn) => setState(fn);
 
   @override
   Widget build(BuildContext context) {
-    print('************ StartScreen: build()');
     return Scaffold(
       appBar: AppBar(
         title: const Text('Start Screen'),
@@ -40,7 +37,7 @@ class _StartState extends State<StartScreen> {
         child: Column(
           children: [
             Text(
-              'Sign In, Please!',
+              'To Edit a Project: Please Input a Project Name',
               style: Theme.of(context).textTheme.headline4,
             ),
             Form(
@@ -49,28 +46,17 @@ class _StartState extends State<StartScreen> {
                 children: [
                   TextFormField(
                     decoration: const InputDecoration(
-                      icon: Icon(Icons.email),
-                      hintText: 'Enter Email',
+                      icon: Icon(Icons.person),
+                      hintText: 'Enter Project Name',
                     ),
-                    keyboardType: TextInputType.emailAddress,
                     autocorrect: false,
-                    validator: con.validateEmail,
-                    onSaved: con.saveEmail,
-                  ),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      icon: Icon(Icons.lock),
-                      hintText: 'Enter Password',
-                    ),
-                    obscureText: true,
-                    autocorrect: false,
-                    validator: con.validatePassword,
-                    onSaved: con.savePassword,
+                    validator: con.validateProjectName,
+                    onSaved: con.saveProjectName,
                   ),
                   ElevatedButton(
-                    onPressed: con.signin,
+                    onPressed: con.editProject,
                     child: Text(
-                      'Sign In',
+                      'Edit Project',
                       style: Theme.of(context).textTheme.button,
                     ),
                   ),
@@ -81,16 +67,11 @@ class _StartState extends State<StartScreen> {
               height: 25.0,
             ),
             ElevatedButton(
-              onPressed: con.counterDemo,
-              child: const Text('Counter Demo'),
-            ),
-            ElevatedButton(
               onPressed: con.cardListDemo,
-              child: const Text('Card List Demo'),
+              child: const Text('Project Card List'),
             ),
-            ElevatedButton(
-              onPressed: con.listViewDemo,
-              child: const Text('List View Demo'),
+            const SizedBox(
+              height: 25.0,
             ),
           ],
         ),
@@ -100,7 +81,6 @@ class _StartState extends State<StartScreen> {
 
   @override
   void dispose() {
-    print('************ StartScreen: dispose()');
     super.dispose();
   }
 }
@@ -108,76 +88,50 @@ class _StartState extends State<StartScreen> {
 class _Controller {
   late _StartState state;
   _Controller(this.state);
-  String? email;
-  String? password;
+  String? projectName;
 
-  void signin() {
+  void editProject() {
     FormState? currentState = state.formKey.currentState;
     if (currentState == null) return;
     if (!currentState.validate()) return;
     currentState.save();
 
-    UserRecord userInfo = fakeDB.firstWhere(
-      (e) => e.email == email && e.password == password,
-      orElse: () => UserRecord(),
+    ProjectRecord projectInfo = projectDB.firstWhere(
+      (e) => e.projectName == projectName,
+      orElse: () => ProjectRecord(),
     );
 
-    if (userInfo.email == '') {
+    if (projectInfo.projectName == '') {
       showSnackBar(
         context: state.context,
-        message: 'Authentication failed. Incorrect email or password',
+        message: 'Authentication failed. Incorrect Project Name',
         seconds: 20,
       );
     } else {
-      Navigator.pushNamed(state.context, UserHomeScreen.routeName, arguments: userInfo);
+      Navigator.pushNamed(state.context, ProjectScreen.routeName,
+          arguments: projectInfo);
     }
   }
 
-  void saveEmail(String? value) {
-    email = value;
+  void saveProjectName(String? value) {
+    projectName = value;
   }
 
-  void savePassword(String? value) {
-    password = value;
-  }
-
-  String? validateEmail(String? value) {
+  String? validateProjectName(String? value) {
     if (value == null || value.isEmpty) {
-      return 'No email provided';
-    } else if (!(value.contains('@') && value.contains('.'))) {
-      return 'Not valid email address';
+      return 'No Project Name Provided';
+    } else if (value.length < 2) {
+      return 'Project Name too short, must be at least 2 charcters';
     } else {
       return null;
     }
-  }
-
-  String? validatePassword(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'No password provided';
-    } else if (value.length < 6) {
-      return 'Password too short, must be at least 6 charcters';
-    } else {
-      return null;
-    }
-  }
-
-  void counterDemo() {
-    Navigator.pushNamed(state.context, CounterDemoScreen.routeName);
   }
 
   void cardListDemo() {
     Navigator.pushNamed(
       state.context,
       CardListScreen.routeName,
-      arguments: courseList,
-    );
-  }
-
-  void listViewDemo() {
-    Navigator.pushNamed(
-      state.context,
-      ListViewScreen.routeName,
-      arguments: courseList,
+      arguments: projectDB,
     );
   }
 }

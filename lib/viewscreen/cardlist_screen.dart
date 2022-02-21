@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:creativework2/model/course.dart';
-import 'package:creativework2/viewscreen/view/course_view.dart';
-import 'package:creativework2/viewscreen/view/webimage.dart';
+import 'package:creativework2/viewscreen/view/project_view.dart';
+import 'package:creativework2/model/project_record.dart';
 
 class CardListScreen extends StatefulWidget {
-  const CardListScreen(this.allCourses, {Key? key}) : super(key: key);
+  const CardListScreen(this.allProject, {Key? key}) : super(key: key);
 
-  final List<Course> allCourses;
+  final List<ProjectRecord> allProject;
 
   static const routeName = '/cardListScreen';
 
@@ -31,7 +30,7 @@ class _CardListState extends State<CardListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Card List'),
+        title: const Text('Project Card List'),
       ),
       body: SingleChildScrollView(
         child: SizedBox(
@@ -39,8 +38,8 @@ class _CardListState extends State<CardListScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              for (var course in widget.allCourses)
-                CourseView(course),
+              for (var project in widget.allProject)
+                ProjectView(project),
             ],
           ),
         ),

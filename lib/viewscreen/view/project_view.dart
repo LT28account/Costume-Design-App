@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:creativework2/model/course.dart';
-import 'package:creativework2/viewscreen/view/webimage.dart';
+import 'package:creativework2/model/project_record.dart';
 
-class CourseView extends StatelessWidget {
+class ProjectView extends StatelessWidget {
   
-  const CourseView(this.course, {Key? key}) : super(key: key);
+  const ProjectView(this.projectRecord, {Key? key}) : super(key: key);
 
-  final Course course;
+  final ProjectRecord projectRecord;
 
   @override
   Widget build(BuildContext context) {
@@ -21,19 +20,11 @@ class CourseView extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              course.number,
+              projectRecord.projectName,
               style: Theme.of(context).textTheme.headline4,
             ),
-            WebImage(
-              context: context,
-              url: course.imageURL,
-            ),
             Text(
-              course.title,
-              style: Theme.of(context).textTheme.headline6,
-            ),
-            Text(
-              'Prerequisite: ${course.prereq}',
+              'Cost: ${projectRecord.cost}',
               style: Theme.of(context).textTheme.headline6,
             ),
           ],
