@@ -15,27 +15,3 @@ void showSnackBar({
   );
   ScaffoldMessenger.of(context).showSnackBar(snackBar);
 }
-
-void showAlertDialog({
-  required BuildContext context,
-  required String title,
-  required Widget widget,
-}) {
-  showDialog(
-    context: context,
-    barrierDismissible: false, //prevents from diaglog from closing when pressed outside barrier, true opposite
-    builder: (context) {
-      return AlertDialog(
-        backgroundColor: Colors.purple[200],
-        title: Text(title),
-        actions: [
-          ElevatedButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('OK'),
-          ),
-        ],
-        content: widget,
-      );
-    },
-  );
-}
