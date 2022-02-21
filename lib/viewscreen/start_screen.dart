@@ -37,7 +37,11 @@ class _StartState extends State<StartScreen> {
         child: Column(
           children: [
             Text(
-              'To Edit a Project: Please Input a Project Name',
+              'To Edit a Project:',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            Text(
+              'Please Input a Project Name',
               style: Theme.of(context).textTheme.headline4,
             ),
             Form(
