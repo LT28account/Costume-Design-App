@@ -1,6 +1,6 @@
-# creativework2
+# Costume Design App
 
-A new Flutter project.
+For Applications for Mobile Devices in Spring of 2022. Costume application.
 
 ## Getting Started
 
